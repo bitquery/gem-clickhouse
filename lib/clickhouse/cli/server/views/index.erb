@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Clickhouse</title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/skeleton.css">
+    <link rel="stylesheet" href="/css/codemirror.css">
+    <link rel="stylesheet" href="/css/datatables.css">
+    <link rel="stylesheet" href="/css/clickhouse.css">
+    <script charset="utf-8" src="/js/jquery.js"></script>
+    <script charset="utf-8" src="/js/codemirror.js"></script>
+    <script charset="utf-8" src="/js/datatables.js"></script>
+    <script charset="utf-8" src="/js/clickhouse.js"></script>
+    <script charset="utf-8" src="/js/sql.js"></script>
+  </head>
+  <body>
+    <h6 class="header">
+      Clickhouse Client
+      <small>&nbsp;/&nbsp; <span id="urls"></span></small>
+    </h6>
+    <div class="container">
+      <div class="row">
+        <!--
+        <div class="three columns">
+          Recent queries
+        </div>
+        -->
+        <div class="twelve columns">
+          <!-- <h6>Compose query</h6> -->
+          <form>
+            <textarea id="sql" name="sql"></textarea>
+            <input class="button" type="submit" value="Run query">
+            <a href="#" class="button download">Save as TSV</a>
+            <span id="stats"></span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      Clickhouse.init(<%=
+        Readline::HISTORY.to_a.inspect
+      %>, <%=
+        Clickhouse.connection.pond.available.collect(&:url).inspect
+      %>);
+    </script>
+  </body>
+</html>
